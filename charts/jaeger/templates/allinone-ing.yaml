@@ -21,7 +21,8 @@ spec:
         paths:
           - path: /
             pathType: {{ default "ImplementationSpecific" $.Values.allInOne.ingress.pathType }}
-            backend: {{- include "common.ingress.backend" (dict "serviceName" (include "jaeger.fullname" $) "servicePort" 16686 "context" $) | nindent 14 }}
+            backend: {{- include "common.ingress.backend" (dict "serviceName" (printf "%s-query" (include "jaeger.fullname" $)) "servicePort" 16686 "context" $) | nindent 14 }}
+
   {{- end -}}
   {{- if .Values.allInOne.ingress.tls }}
   tls:
