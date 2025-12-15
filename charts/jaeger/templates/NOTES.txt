@@ -9,8 +9,8 @@
 📊 You can log into the Jaeger Query UI here:
 
 {{- if .Values.allInOne.ingress.enabled }}
-  {{- range .Values.allInOne.ingress.hosts }}
-  http://{{ .host }}
+  {{- range $host :=  .Values.allInOne.ingress.hosts }}
+  http://{{ $host }}
   {{- end }}
 {{- else }}
   export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/instance={{ .Release.Name }},app.kubernetes.io/component=all-in-one" -o jsonpath="{.items[0].metadata.name}")
